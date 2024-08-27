@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function updateCountdown() {
-    const endDate = new Date('2024-08-27T16:48:00');
+    const endDate = new Date('2024-08-28T00:00:00');
     const now = new Date();
     const timeDifference = endDate - now;
 
