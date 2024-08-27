@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../scss/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-red-200">
+    <div id="videoPopup" class="fixed inset-0 z-50 flex items-center justify-center hidden bg-black bg-opacity-50">
+        <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg">
+            <button id="closeVideoBtn" class="absolute top-0 right-0 p-2 text-white bg-red-500 rounded-full">
+                &times;
+            </button>
+            <div class="aspect-w-16 aspect-h-9">
+                <video id="videoPlayer" class="w-full" controls>
+                    <source src="../video/vid.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+    <div class="space-y-4 ml-3 mt-10">
+        <a href="../doc/Happy Birthday Sayang.pdf" download>
+            <div class="bg-pink-500 text-xl text-white flex justify-center items-center w-10 h-10 rounded-full">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+        </a>
+        <button id="openVideoBtn">
+            <div class="bg-pink-500 text-xl text-white flex justify-center items-center w-10 h-10 rounded-full">
+                <i class="fa-solid fa-play"></i>
+            </div>
+        </button>
+    </div>
+    <div class="cake">
+        <div class="plate"></div>
+        <div class="layer layer-bottom"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-top"></div>
+        <div class="icing"></div>
+        <div class="drip drip1"></div>
+        <div class="drip drip2"></div>
+        <div class="drip drip3"></div>
+        <div class="candle">
+            <div id="flame" class="flame"></div>
+        </div>
+    </div>
+    <div class="pyro">
+        <div class="before"></div>
+        <div class="after"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const flame = document.getElementById('flame');
+    const pyro = document.querySelector('.pyro');
+
+    flame.addEventListener('click', function() {
+        flame.classList.toggle('extinguished');
+
+        if (flame.classList.contains('extinguished')) {
+            pyro.style.display = 'block';
+            setTimeout(() => {
+                pyro.style.display = 'none';
+            }, 10000); // durasi ledakan 1 detik
+        } else {
+            pyro.style.display = 'none';
+        }
+    });
+});
+// Ambil elemen-elemen yang dibutuhkan
+const openVideoBtn = document.getElementById('openVideoBtn');
+        const videoPopup = document.getElementById('videoPopup');
+        const closeVideoBtn = document.getElementById('closeVideoBtn');
+        const videoPlayer = document.getElementById('videoPlayer');
+
+        // Fungsi untuk membuka pop-up video
+        openVideoBtn.addEventListener('click', () => {
+            videoPopup.classList.remove('hidden');
+            videoPlayer.play();
+        });
+
+        // Fungsi untuk menutup pop-up video
+        closeVideoBtn.addEventListener('click', () => {
+            videoPopup.classList.add('hidden');
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+        });
+
+        // Fungsi untuk menutup pop-up jika area luar video diklik
+        videoPopup.addEventListener('click', (event) => {
+            if (event.target === videoPopup) {
+                videoPopup.classList.add('hidden');
+                videoPlayer.pause();
+                videoPlayer.currentTime = 0;
+            }
+        });
+    </script>
+</body>
+</html>
